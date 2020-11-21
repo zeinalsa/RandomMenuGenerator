@@ -4,27 +4,29 @@ const menu = {
     mains: [{name: 'pizza', price: 5}],
     desserts: [{name: 'cheesecake', price: 5}],
   },
+  //Edit: changed getters to utilise the get courses() method, as opposed to accessing _courses directly.
   get getAppetizers() {
-    return this._courses.appetizers;
+    return this.courses.appetizers;
     },
   get getMains() {
-    return this._courses.mains;
+    return this.courses.mains;
   },  
   get getDesserts() {
-    return this._courses.desserts;
+    return this.courses.desserts;
   },
   set addAppetizers(appetizer) {
-    return this._courses.appetizers.push(appetizer);
+    return this.courses.appetizers.push(appetizer);
   },
   set addMains(mains) {
-    return this._courses.mains.push(mains);
+    return this.courses.mains.push(mains);
   },
   set addDesserts(dessert) {
-    return this._courses.desserts.push(dessert);
+    return this.courses.desserts.push(dessert);
   },
   get courses() {
     return this._courses;
   },
+  //will generate an object that will get pushed into the relevant property of _courses object
   addDishToCourse(courseName, dishName, dishPrice) {
    const dish = {
       name: dishName,
@@ -37,11 +39,13 @@ const menu = {
       default: console.log('this is not a valid course choice')
     }
   },
+  //will generate an object
   getRandomDishFromCourse(courseName) {
     var dishes = this.courses[courseName]
     let randIndex = Math.floor(Math.random() * dishes.length)
     return dishes[randIndex]
     },
+  
   generateRandomMeal() {
     let appetizer = this.getRandomDishFromCourse('appetizers');
     let mains = this.getRandomDishFromCourse('mains');
